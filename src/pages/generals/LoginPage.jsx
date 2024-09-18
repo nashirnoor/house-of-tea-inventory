@@ -49,17 +49,16 @@ const LoginPage = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: async (values) => {
-      try {
-        console.log("Login form submitted:", values);
-        const response = await dispatch(loginUser(values)).unwrap();
-        console.log("Backend API response:", response);
-
-        // Navigation will be handled by the useEffect hook
-      } catch (error) {
-        console.error("Login failed:", error);
-        // Error handling is managed by the Redux state
-      }
-    },
+  try {
+    console.log("Login form submitted:", values);
+    const response = await dispatch(loginUser(values)).unwrap();
+    console.log("Backend API response:", response);
+    console.log("User role:", response.user.role);
+  } catch (error) {
+    console.error("Login failed:", error);
+    console.error("Error details:", error.response?.data);
+  }
+},
   });
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
